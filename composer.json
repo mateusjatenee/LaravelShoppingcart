@@ -1,0 +1,31 @@
+{
+    "name": "gloudemans/shoppingcart",
+    "description": "Laravel Shoppingcart",
+    "keywords": ["laravel", "shoppingcart"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rob Gloudemans",
+            "email": "info@robgloudemans.nl"
+        }
+    ],
+    "require": {
+        "illuminate/support": "5.1.*|5.2.*|5.3.*",
+        "illuminate/session": "5.1.*|5.2.*|5.3.*",
+        "illuminate/events": "5.1.*|5.2.*|5.3.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "~0.9.0",
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gloudemans\\Shoppingcart\\": "src/"
+        }
+    },
+    "suggest": {
+        "gloudemans/notify": "Simple flash notifications for Laravel"
+    },
+    "minimum-stability": "stable"
+}
