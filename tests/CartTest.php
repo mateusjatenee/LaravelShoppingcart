@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Collection;
 use Mateusjatenee\Shoppingcart\Cart;
 use Mateusjatenee\Shoppingcart\Contracts\Buyable;
 
@@ -61,6 +62,28 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $this->assertItemsInCart(1, $cart->instance(Cart::DEFAULT_INSTANCE));
         $this->assertItemsInCart(1, $cart->instance('wishlist'));
+    }
+
+    /** @test */
+    public function it_can_list_instances()
+    {
+        $cart = $this->getCart();
+
+        $item = $this->getBuyableMock();
+
+        $cart->add($item);
+
+        $cart->instance('foo');
+
+        $cart->add($item);
+
+        $cart_instances = $cart->instances();
+
+        $this->assertArrayHasKey('default', $cart_instances);
+        $this->assertArrayHasKey('foo', $cart_instances);
+
+        $this->assertInstanceOf(Collection::class, $cart_instances['default']);
+        $this->assertInstanceOf(Collection::class, $cart_instances['foo']);
     }
 
     /** @test */

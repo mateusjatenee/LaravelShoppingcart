@@ -78,6 +78,18 @@ class Cart
     }
 
     /**
+     * List the available instances
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function instances()
+    {
+        $instances = new Collection($this->session->all()['cart']);
+
+        return $instances;
+    }
+
+    /**
      * Add an item to the cart.
      *
      * @param mixed     $id
