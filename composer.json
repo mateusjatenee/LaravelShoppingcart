@@ -1,5 +1,5 @@
 {
-    "name": "gloudemans/shoppingcart",
+    "name": "mateusjatenee/shoppingcart",
     "description": "Laravel Shoppingcart",
     "keywords": ["laravel", "shoppingcart"],
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Rob Gloudemans",
             "email": "info@robgloudemans.nl"
+        },
+        {
+            "name": "Mateus Guimaraes",
+            "email": "mateus@weenside.com"
         }
     ],
     "require": {
@@ -21,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Gloudemans\\Shoppingcart\\": "src/"
+            "Mateusjatenee\\Shoppingcart\\": "src/"
         }
     },
     "suggest": {

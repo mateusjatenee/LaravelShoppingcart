@@ -1,7 +1,8 @@
 <?php
 
-namespace Gloudemans\Shoppingcart\Exceptions;
+namespace Mateusjatenee\Shoppingcart\Exceptions;
 
 use RuntimeException;
 
-class CartAlreadyStoredException extends RuntimeException {}
+class CartAlreadyStoredException extends RuntimeException
+{}

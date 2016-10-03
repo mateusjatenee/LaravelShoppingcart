@@ -18,17 +18,17 @@ Install the package through [Composer](http://getcomposer.org/).
 
 Run the Composer require command from the Terminal:
 
-    composer require gloudemans/shoppingcart
+    composer require mateusjatenee/shoppingcart
 
 Now all you have to do is add the service provider of the package and alias the package. To do this open your `config/app.php` file.
 
 Add a new line to the `providers` array:
 
-	Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+	Mateusjatenee\Shoppingcart\ShoppingcartServiceProvider::class
 
 And optionally add a new line to the `aliases` array:
 
-	'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+	'Cart' => Mateusjatenee\Shoppingcart\Facades\Cart::class,
 
 Now you're ready to start using the shoppingcart in your application.
 

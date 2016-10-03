@@ -1,16 +1,15 @@
 <?php
 
-use Gloudemans\Shoppingcart\Cart;
+use Mateusjatenee\Shoppingcart\Cart;
 use PHPUnit_Framework_Assert as PHPUnit;
 
 trait CartAssertions
 {
-
     /**
      * Assert that the cart contains the given number of items.
      *
-     * @param int|float                     $items
-     * @param \Gloudemans\Shoppingcart\Cart $cart
+     * @param int|float                        $items
+     * @param \Mateusjatenee\Shoppingcart\Cart $cart
      */
     public function assertItemsInCart($items, Cart $cart)
     {
@@ -22,8 +21,8 @@ trait CartAssertions
     /**
      * Assert that the cart contains the given number of rows.
      *
-     * @param int                           $rows
-     * @param \Gloudemans\Shoppingcart\Cart $cart
+     * @param int                              $rows
+     * @param \Mateusjatenee\Shoppingcart\Cart $cart
      */
     public function assertRowsInCart($rows, Cart $cart)
     {
@@ -31,5 +30,4 @@ trait CartAssertions
 
         PHPUnit::assertCount($rows, $cart->content(), "Expected the cart to contain {$rows} rows, but got {$actual}.");
     }
-
 }

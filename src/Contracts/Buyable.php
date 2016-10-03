@@ -1,6 +1,6 @@
 <?php
 
-namespace Gloudemans\Shoppingcart\Contracts;
+namespace Mateusjatenee\Shoppingcart\Contracts;
 
 interface Buyable
 {

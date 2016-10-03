@@ -1,8 +1,7 @@
 <?php
 
-use Gloudemans\Shoppingcart\Cart;
-use Gloudemans\Shoppingcart\Contracts\Buyable;
-use Gloudemans\Shoppingcart\Contracts\Taxable;
+use Mateusjatenee\Shoppingcart\Cart;
+use Mateusjatenee\Shoppingcart\Contracts\Buyable;
 
 class CartTest extends Orchestra\Testbench\TestCase
 {
@@ -12,18 +11,18 @@ class CartTest extends Orchestra\Testbench\TestCase
      * Set the package service provider.
      *
      * @param \Illuminate\Foundation\Application $app
+     *
      * @return array
      */
     protected function getPackageProviders($app)
     {
-        return [\Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class];
+        return [\Mateusjatenee\Shoppingcart\ShoppingcartServiceProvider::class];
     }
 
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return void
+     * @param \Illuminate\Foundation\Application $app
      */
     protected function getEnvironmentSetUp($app)
     {
@@ -33,12 +32,12 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
-    
+
     /** @test */
     public function it_has_a_default_instance()
     {
@@ -63,7 +62,7 @@ class CartTest extends Orchestra\Testbench\TestCase
         $this->assertItemsInCart(1, $cart->instance(Cart::DEFAULT_INSTANCE));
         $this->assertItemsInCart(1, $cart->instance('wishlist'));
     }
-    
+
     /** @test */
     public function it_can_add_an_item()
     {
@@ -89,7 +88,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $cartItem = $cart->add($item);
 
-        $this->assertInstanceOf(\Gloudemans\Shoppingcart\CartItem::class, $cartItem);
+        $this->assertInstanceOf(\Mateusjatenee\Shoppingcart\CartItem::class, $cartItem);
         $this->assertEquals('027c91341fd5cf4d2579b49c4b6a90da', $cartItem->rowId);
     }
 
@@ -122,7 +121,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $this->assertTrue(is_array($cartItems));
         $this->assertCount(2, $cartItems);
-        $this->assertContainsOnlyInstancesOf(\Gloudemans\Shoppingcart\CartItem::class, $cartItems);
+        $this->assertContainsOnlyInstancesOf(\Mateusjatenee\Shoppingcart\CartItem::class, $cartItems);
     }
 
     /** @test */
@@ -158,7 +157,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $cart->add([
             ['id' => 1, 'name' => 'Test item 1', 'qty' => 1, 'price' => 10.00],
-            ['id' => 2, 'name' => 'Test item 2', 'qty' => 1, 'price' => 10.00]
+            ['id' => 2, 'name' => 'Test item 2', 'qty' => 1, 'price' => 10.00],
         ]);
 
         $this->assertEquals(2, $cart->count());
@@ -179,7 +178,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $cartItem = $cart->get('07d5da5550494c62daf9993cf954303f');
 
-        $this->assertInstanceOf(\Gloudemans\Shoppingcart\CartItem::class, $cartItem);
+        $this->assertInstanceOf(\Mateusjatenee\Shoppingcart\CartItem::class, $cartItem);
         $this->assertEquals('XL', $cartItem->options->size);
         $this->assertEquals('red', $cartItem->options->color);
     }
@@ -316,7 +315,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
     /**
      * @test
-     * @expectedException \Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException
+     * @expectedException \Mateusjatenee\Shoppingcart\Exceptions\InvalidRowIDException
      */
     public function it_will_throw_an_exception_if_a_rowid_was_not_found()
     {
@@ -426,7 +425,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $cartItem = $cart->get('027c91341fd5cf4d2579b49c4b6a90da');
 
-        $this->assertInstanceOf(\Gloudemans\Shoppingcart\CartItem::class, $cartItem);
+        $this->assertInstanceOf(\Mateusjatenee\Shoppingcart\CartItem::class, $cartItem);
     }
 
     /** @test */
@@ -480,7 +479,7 @@ class CartTest extends Orchestra\Testbench\TestCase
                 'price' => 10.00,
                 'tax' => 2.10,
                 'subtotal' => 10.0,
-                'options' => new \Gloudemans\Shoppingcart\CartItemOptions,
+                'options' => new \Mateusjatenee\Shoppingcart\CartItemOptions(),
             ],
             '370d08585360f5c568b18d1f2e4ca1df' => [
                 'rowId' => '370d08585360f5c568b18d1f2e4ca1df',
@@ -490,8 +489,8 @@ class CartTest extends Orchestra\Testbench\TestCase
                 'price' => 10.00,
                 'tax' => 2.10,
                 'subtotal' => 10.0,
-                'options' => new \Gloudemans\Shoppingcart\CartItemOptions,
-            ]
+                'options' => new \Mateusjatenee\Shoppingcart\CartItemOptions(),
+            ],
         ], $content->toArray());
     }
 
@@ -558,7 +557,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $cartItem);
         $this->assertCount(1, $cartItem);
-        $this->assertInstanceOf(\Gloudemans\Shoppingcart\CartItem::class, $cartItem->first());
+        $this->assertInstanceOf(\Mateusjatenee\Shoppingcart\CartItem::class, $cartItem->first());
         $this->assertEquals(1, $cartItem->first()->id);
     }
 
@@ -599,7 +598,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $cartItem);
         $this->assertCount(1, $cartItem);
-        $this->assertInstanceOf(\Gloudemans\Shoppingcart\CartItem::class, $cartItem->first());
+        $this->assertInstanceOf(\Mateusjatenee\Shoppingcart\CartItem::class, $cartItem->first());
         $this->assertEquals(1, $cartItem->first()->id);
     }
 
@@ -614,7 +613,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $cartItem = $cart->get('027c91341fd5cf4d2579b49c4b6a90da');
 
-        $this->assertContains('Gloudemans_Shoppingcart_Contracts_Buyable', PHPUnit_Framework_Assert::readAttribute($cartItem, 'associatedModel'));
+        $this->assertContains('Mateusjatenee_Shoppingcart_Contracts_Buyable', PHPUnit_Framework_Assert::readAttribute($cartItem, 'associatedModel'));
     }
 
     /** @test */
@@ -635,7 +634,7 @@ class CartTest extends Orchestra\Testbench\TestCase
 
     /**
      * @test
-     * @expectedException \Gloudemans\Shoppingcart\Exceptions\UnknownModelException
+     * @expectedException \Mateusjatenee\Shoppingcart\Exceptions\UnknownModelException
      * @expectedExceptionMessage The supplied model SomeModel does not exist.
      */
     public function it_will_throw_an_exception_when_a_non_existing_model_is_being_associated()
@@ -652,7 +651,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $cart = $this->getCart();
 
-        $model = new ModelStub;
+        $model = new ModelStub();
 
         $cart->add(1, 'Test item', 1, 10.00);
 
@@ -857,9 +856,9 @@ class CartTest extends Orchestra\Testbench\TestCase
         $this->seeInDatabase('shoppingcart', ['identifier' => $identifier, 'instance' => 'default', 'content' => $serialized]);
     }
 
-    /** 
+    /**
      * @test
-     * @expectedException \Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException
+     * @expectedException \Mateusjatenee\Shoppingcart\Exceptions\CartAlreadyStoredException
      * @expectedExceptionMessage A cart with identifier 123 was already stored.
      */
     public function it_will_throw_an_exception_when_a_cart_was_already_stored_using_the_specified_identifier()
@@ -970,7 +969,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     /**
      * Get an instance of the cart.
      *
-     * @return \Gloudemans\Shoppingcart\Cart
+     * @return \Mateusjatenee\Shoppingcart\Cart
      */
     private function getCart()
     {
@@ -988,6 +987,7 @@ class CartTest extends Orchestra\Testbench\TestCase
      * @param int    $id
      * @param string $name
      * @param float  $price
+     *
      * @return \Mockery\MockInterface
      */
     private function getBuyableMock($id = 1, $name = 'Item name', $price = 10.00)
@@ -1002,8 +1002,8 @@ class CartTest extends Orchestra\Testbench\TestCase
     }
 
     /**
-     * Set the config number format
-     * 
+     * Set the config number format.
+     *
      * @param $decimals
      * @param $decimalPoint
      * @param $thousandSeperator
@@ -1016,7 +1016,11 @@ class CartTest extends Orchestra\Testbench\TestCase
     }
 }
 
-class ModelStub {
+class ModelStub
+{
     public $someValue = 'Some value';
-    public function find($id) { return $this; }
+    public function find($id)
+    {
+        return $this;
+    }
 }
