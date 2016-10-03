@@ -4,11 +4,11 @@ This package was started by [Rob Gloudemans](https://github.com/Crinsane) and I'
 
 
 ## LaravelShoppingcart
-[![Build Status](https://travis-ci.org/Crinsane/LaravelShoppingcart.png?branch=master)](https://travis-ci.org/Crinsane/LaravelShoppingcart)
-[![Total Downloads](https://poser.pugx.org/gloudemans/shoppingcart/downloads.png)](https://packagist.org/packages/gloudemans/shoppingcart)
-[![Latest Stable Version](https://poser.pugx.org/gloudemans/shoppingcart/v/stable)](https://packagist.org/packages/gloudemans/shoppingcart)
-[![Latest Unstable Version](https://poser.pugx.org/gloudemans/shoppingcart/v/unstable)](https://packagist.org/packages/gloudemans/shoppingcart)
-[![License](https://poser.pugx.org/gloudemans/shoppingcart/license)](https://packagist.org/packages/gloudemans/shoppingcart)
+[![Build Status](https://travis-ci.org/mateusjatenee/LaravelShoppingcart.png?branch=master)](https://travis-ci.org/mateusjatenee/LaravelShoppingcart)
+[![Total Downloads](https://poser.pugx.org/mateusjatenee/shoppingcart/downloads.png)](https://packagist.org/packages/mateusjatenee/shoppingcart)
+[![Latest Stable Version](https://poser.pugx.org/mateusjatenee/shoppingcart/v/stable)](https://packagist.org/packages/mateusjatenee/shoppingcart)
+[![Latest Unstable Version](https://poser.pugx.org/mateusjatenee/shoppingcart/v/unstable)](https://packagist.org/packages/mateusjatenee/shoppingcart)
+[![License](https://poser.pugx.org/mateusjatenee/shoppingcart/license)](https://packagist.org/packages/mateusjatenee/shoppingcart)
 
 A simple shoppingcart implementation for Laravel.
 
