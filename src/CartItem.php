@@ -64,6 +64,13 @@ class CartItem implements Arrayable
     private $taxRate = 0;
 
     /**
+     * The static tax for the cart item.
+     *
+     * @var int|float
+     */
+    private $staticTax = null;
+
+    /**
      * CartItem constructor.
      *
      * @param int|string $id
@@ -241,6 +248,16 @@ class CartItem implements Arrayable
     }
 
     /**
+     * Set the static tax.
+     *
+     * @param int|float $taxValue
+     */
+    public function setStaticTax($taxValue)
+    {
+        $this->staticTax = $taxValue;
+    }
+
+    /**
      * Get an attribute from the cart item or get the associated model.
      *
      * @param string $attribute
@@ -266,7 +283,7 @@ class CartItem implements Arrayable
         }
 
         if ($attribute === 'tax') {
-            return $this->price * ($this->taxRate / 100);
+            return isset($this->staticTax) ? $this->staticTax : $this->price * ($this->taxRate / 100);
         }
 
         if ($attribute === 'taxTotal') {
@@ -334,7 +351,7 @@ class CartItem implements Arrayable
     {
         ksort($options);
 
-        return md5($id.serialize($options));
+        return md5($id . serialize($options));
     }
 
     /**

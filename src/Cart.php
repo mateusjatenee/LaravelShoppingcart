@@ -328,11 +328,11 @@ class Cart
      * @param string    $rowId
      * @param int|float $taxRate
      */
-    public function setTax($rowId, $taxRate)
+    public function setTax($rowId, $taxRate, $static = false)
     {
         $cartItem = $this->get($rowId);
 
-        $cartItem->setTaxRate($taxRate);
+        $static ? $cartItem->setStaticTax($taxRate) : $cartItem->setTaxRate($taxRate);
 
         $content = $this->getContent();
 

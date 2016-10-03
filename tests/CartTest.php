@@ -722,6 +722,22 @@ class CartTest extends Orchestra\Testbench\TestCase
     }
 
     /** @test */
+    public function it_can_define_an_static_tax()
+    {
+        $cart = $this->getCart();
+
+        $item = $this->getBuyableMock(1, 'Some title', 10.00);
+
+        $cart->add($item, 1);
+
+        $cart->setTax('027c91341fd5cf4d2579b49c4b6a90da', 10, true);
+
+        $cartItem = $cart->get('027c91341fd5cf4d2579b49c4b6a90da');
+
+        $this->assertEquals(10, $cartItem->tax);
+    }
+
+    /** @test */
     public function it_can_return_the_calculated_tax_formatted()
     {
         $cart = $this->getCart();
@@ -838,7 +854,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $this->expectsEvents('cart.stored');
@@ -865,7 +881,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $this->expectsEvents('cart.stored');
@@ -886,7 +902,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $this->expectsEvents('cart.restored');
@@ -915,7 +931,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $cart = $this->getCart();
