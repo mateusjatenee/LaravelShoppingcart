@@ -41,6 +41,7 @@ Look at one of the following topics to learn more about LaravelShoppingcart
 * [Collections](#collections)
 * [Instances](#instances)
 * [Models](#models)
+* [Tax](#tax)
 * [Exceptions](#exceptions)
 * [Events](#events)
 * [Example](#example)
@@ -326,6 +327,32 @@ Cart::add('293ad', 'Product 1', 1, 9.99, ['size' => 'large'])->associate('Produc
 foreach(Cart::content() as $row) {
 	echo 'You have ' . $row->qty . ' items of ' . $row->model->name . ' with description: "' . $row->model->description . '" in your cart.';
 }
+```
+
+## Tax   
+
+It is possible to set static or dynamic taxes for items. For instance, let's say we want to add the 'Laravel T-Shirt' and set a 10% percent tax on it.   
+
+```php   
+$item = Cart::add('293ad', 'Laravel T-Shirt', 1, 100);
+
+Cart::setTax($item->rowId, 10); // 10% percent 
+
+$item->tax // 10
+$item->priceTax // 110 (100 + 10)
+$item->subtotal // 100 (quantity * price)
+$item->total // 110 (quantity * priceTax)
+
+// you can also set static taxes by passing a third argument as true. For instance, you want the tax to be 20, always.  
+
+$item = Cart::add('293ad', 'Laravel T-Shirt', 1, 100);
+
+Cart::setTax($item->rowId, 20, true); // 10% percent 
+
+$item->tax // 20
+$item->priceTax // 120 (100 + 20)
+$item->subtotal // 100 (quantity * price)
+$item->total // 120 (quantity * priceTax)
 ```
 
 ## Exceptions
