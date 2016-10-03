@@ -1,3 +1,8 @@
+## Notice  
+
+This package was started by [Rob Gloudemans](https://github.com/Crinsane) and I'm really, really grateful to him for it. However, I use this package in a heavy-loaded website and need some features, and I'm not sure Rob still has interest or time to mantain this package. I've contacted him but needed to add some features so I created this repo asap.  
+
+
 ## LaravelShoppingcart
 [![Build Status](https://travis-ci.org/Crinsane/LaravelShoppingcart.png?branch=master)](https://travis-ci.org/Crinsane/LaravelShoppingcart)
 [![Total Downloads](https://poser.pugx.org/gloudemans/shoppingcart/downloads.png)](https://packagist.org/packages/gloudemans/shoppingcart)
