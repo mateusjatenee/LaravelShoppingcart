@@ -1,4 +1,5 @@
 <?php
+
 namespace Mateusjatenee\Shoppingcart\Facades;
 
 use Illuminate\Support\Facades\Facade;

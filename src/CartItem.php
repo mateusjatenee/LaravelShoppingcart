@@ -96,6 +96,7 @@ class CartItem implements Arrayable
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeperator
+     *
      * @return string
      */
     public function price($decimals = null, $decimalPoint = null, $thousandSeperator = null)
@@ -109,6 +110,7 @@ class CartItem implements Arrayable
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeperator
+     *
      * @return string
      */
     public function priceTax($decimals = null, $decimalPoint = null, $thousandSeperator = null)
@@ -118,11 +120,12 @@ class CartItem implements Arrayable
 
     /**
      * Returns the formatted subtotal.
-     * Subtotal is price for whole CartItem without TAX
+     * Subtotal is price for whole CartItem without TAX.
      *
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeperator
+     *
      * @return string
      */
     public function subtotal($decimals = null, $decimalPoint = null, $thousandSeperator = null)
@@ -132,11 +135,12 @@ class CartItem implements Arrayable
 
     /**
      * Returns the formatted total.
-     * Total is price for whole CartItem with TAX
+     * Total is price for whole CartItem with TAX.
      *
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeperator
+     *
      * @return string
      */
     public function total($decimals = null, $decimalPoint = null, $thousandSeperator = null)
@@ -150,6 +154,7 @@ class CartItem implements Arrayable
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeperator
+     *
      * @return string
      */
     public function tax($decimals = null, $decimalPoint = null, $thousandSeperator = null)
@@ -163,6 +168,7 @@ class CartItem implements Arrayable
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeperator
+     *
      * @return string
      */
     public function taxTotal($decimals = null, $decimalPoint = null, $thousandSeperator = null)
@@ -188,7 +194,6 @@ class CartItem implements Arrayable
      * Update the cart item from a Buyable.
      *
      * @param \Mateusjatenee\Shoppingcart\Contracts\Buyable $item
-     * @return void
      */
     public function updateFromBuyable(Buyable $item)
     {
@@ -202,7 +207,6 @@ class CartItem implements Arrayable
      * Update the cart item from an array.
      *
      * @param array $attributes
-     * @return void
      */
     public function updateFromArray(array $attributes)
     {
@@ -220,7 +224,6 @@ class CartItem implements Arrayable
      * Associate the cart item with the given model.
      *
      * @param mixed $model
-     * @return void
      */
     public function associate($model)
     {
@@ -231,7 +234,6 @@ class CartItem implements Arrayable
      * Set the tax rate.
      *
      * @param int|float $taxRate
-     * @return void
      */
     public function setTaxRate($taxRate)
     {
@@ -242,6 +244,7 @@ class CartItem implements Arrayable
      * Get an attribute from the cart item or get the associated model.
      *
      * @param string $attribute
+     *
      * @return mixed
      */
     public function __get($attribute)
@@ -271,17 +274,18 @@ class CartItem implements Arrayable
         }
 
         if ($attribute === 'model') {
-            return with(new $this->associatedModel)->find($this->id);
+            return with(new $this->associatedModel())->find($this->id);
         }
 
-        return null;
+        return;
     }
 
     /**
      * Create a new instance from a Buyable.
      *
      * @param \Mateusjatenee\Shoppingcart\Contracts\Buyable $item
-     * @param array                                      $options
+     * @param array                                         $options
+     *
      * @return \Mateusjatenee\Shoppingcart\CartItem
      */
     public static function fromBuyable(Buyable $item, array $options = [])
@@ -293,6 +297,7 @@ class CartItem implements Arrayable
      * Create a new instance from the given array.
      *
      * @param array $attributes
+     *
      * @return \Mateusjatenee\Shoppingcart\CartItem
      */
     public static function fromArray(array $attributes)
@@ -309,6 +314,7 @@ class CartItem implements Arrayable
      * @param string     $name
      * @param float      $price
      * @param array      $options
+     *
      * @return \Mateusjatenee\Shoppingcart\CartItem
      */
     public static function fromAttributes($id, $name, $price, array $options = [])
@@ -321,13 +327,14 @@ class CartItem implements Arrayable
      *
      * @param string $id
      * @param array  $options
+     *
      * @return string
      */
     protected function generateRowId($id, array $options)
     {
         ksort($options);
 
-        return md5($id . serialize($options));
+        return md5($id.serialize($options));
     }
 
     /**
@@ -350,12 +357,13 @@ class CartItem implements Arrayable
     }
 
     /**
-     * Get the Formated number
+     * Get the Formated number.
      *
      * @param $value
      * @param $decimals
      * @param $decimalPoint
      * @param $thousandSeperator
+     *
      * @return string
      */
     private function numberFormat($value, $decimals, $decimalPoint, $thousandSeperator)
