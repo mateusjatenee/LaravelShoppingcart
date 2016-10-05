@@ -297,9 +297,14 @@ class CartItem implements Arrayable
         return;
     }
 
+    /**
+     * Sets the price of a given item as zero.
+     *
+     * @return \Mateusjatenee\Shoppingcart\CartItem
+     */
     public function setFree()
     {
-        $this->free = true;
+        $this->price = 0;
 
         return $this;
     }
