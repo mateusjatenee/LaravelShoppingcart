@@ -1005,6 +1005,18 @@ class CartTest extends Orchestra\Testbench\TestCase
         event(new \Illuminate\Auth\Events\Logout($user));
     }
 
+    /** @test */
+    public function it_can_create_free_items()
+    {
+        $cart = $this->getCart();
+
+        $item = $this->getBuyableMock(1, 'First item', 10.00);
+
+        $item = $cart->add($item)->setFree();
+
+        $this->assertEquals(0, $item->price);
+    }
+
     /**
      * Get an instance of the cart.
      *

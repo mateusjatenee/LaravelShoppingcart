@@ -298,6 +298,18 @@ class CartItem implements Arrayable
     }
 
     /**
+     * Sets the price of a given item as zero.
+     *
+     * @return \Mateusjatenee\Shoppingcart\CartItem
+     */
+    public function setFree()
+    {
+        $this->price = 0;
+
+        return $this;
+    }
+
+    /**
      * Create a new instance from a Buyable.
      *
      * @param \Mateusjatenee\Shoppingcart\Contracts\Buyable $item
