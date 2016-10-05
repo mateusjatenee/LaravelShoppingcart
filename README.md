@@ -100,7 +100,12 @@ Cart::add([
 
 Cart::add([$product1, $product2]);
 
-```
+```   
+
+You can also set an item as free (0 price) by calling the `setFree` method just after creating it.   
+
+```php   
+Cart::add($product, 1, ['size' => 'large'])->setFree();
 
 ### Cart::update()
 
