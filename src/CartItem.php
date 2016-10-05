@@ -297,6 +297,13 @@ class CartItem implements Arrayable
         return;
     }
 
+    public function setFree()
+    {
+        $this->free = true;
+
+        return $this;
+    }
+
     /**
      * Create a new instance from a Buyable.
      *
