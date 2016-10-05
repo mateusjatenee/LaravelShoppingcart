@@ -78,7 +78,7 @@ class Cart
     }
 
     /**
-     * List the available instances
+     * List the available instances.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -368,8 +368,8 @@ class Cart
 
         $this->getConnection()->table($this->getTableName())->insert([
             'identifier' => $identifier,
-            'instance' => $this->currentInstance(),
-            'content' => serialize($content),
+            'instance'   => $this->currentInstance(),
+            'content'    => serialize($content),
         ]);
 
         $this->events->fire('cart.stored');
@@ -431,8 +431,6 @@ class Cart
         if ($attribute === 'subtotal') {
             return $this->subtotal();
         }
-
-        return;
     }
 
     /**
