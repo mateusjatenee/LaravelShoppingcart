@@ -4,7 +4,6 @@ namespace Mateusjatenee\Shoppingcart;
 
 trait CanBeBought
 {
-
     /**
      * Get the identifier of the Buyable item.
      *
@@ -33,8 +32,6 @@ trait CanBeBought
         if (property_exists($this, 'description')) {
             return $this->description;
         }
-
-        return null;
     }
 
     /**
@@ -47,7 +44,5 @@ trait CanBeBought
         if (property_exists($this, 'price')) {
             return $this->price;
         }
-
-        return null;
     }
 }
