@@ -8,28 +8,28 @@ use Illuminate\Support\Collection;
 class Discount
 {
     /**
-     * The discount value
+     * The discount value.
      *
      * @var int|float
      */
     private $value;
 
     /**
-     * The discount rules
+     * The discount rules.
      *
      * @var array
      */
     private $rules;
 
     /**
-     * The associated CartItem
+     * The associated CartItem.
      *
      * @var \Mateusjatenee\Shoppingcart\CartItem
      */
     private $cartItem;
 
     /**
-     * The validator instance
+     * The validator instance.
      *
      * @var \Illuminate\Contracts\Validation\Factory
      */
@@ -37,11 +37,10 @@ class Discount
 
     /**
      * @param $value
-     * @param array|null $rules
-     *
+     * @param array|null                               $rules
      * @param \Illuminate\Contracts\Validation\Factory $validator
      */
-    public function __construct($value, $rules = null, Validator $validator)
+    public function __construct($value, $rules, Validator $validator)
     {
         $this->value = $value;
         $this->rules = new Collection($rules);
@@ -49,7 +48,7 @@ class Discount
     }
 
     /**
-     * Sets the rules of the discount
+     * Sets the rules of the discount.
      *
      * @param array $rules
      */
@@ -59,7 +58,7 @@ class Discount
     }
 
     /**
-     * Gets the discounted value of the item
+     * Gets the discounted value of the item.
      *
      * @param $item
      * @param $price
@@ -76,7 +75,7 @@ class Discount
     }
 
     /**
-     * Validates the given item
+     * Validates the given item.
      *
      * @param $item
      * @param $price
@@ -87,5 +86,4 @@ class Discount
     {
         return $this->validator->make($item->toArray(), $this->rules->toArray());
     }
-
 }

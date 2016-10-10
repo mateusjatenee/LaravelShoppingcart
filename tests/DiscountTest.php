@@ -32,9 +32,9 @@ class DiscountTest extends Orchestra\Testbench\TestCase
 
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
     }
 
@@ -52,7 +52,6 @@ class DiscountTest extends Orchestra\Testbench\TestCase
         $item->setDiscount($discount);
 
         $this->assertEquals(5, $item->price);
-
     }
 
     /** @test */
@@ -154,5 +153,4 @@ class DiscountTest extends Orchestra\Testbench\TestCase
 
         return $item;
     }
-
 }
