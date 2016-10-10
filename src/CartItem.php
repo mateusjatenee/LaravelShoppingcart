@@ -260,6 +260,11 @@ class CartItem implements Arrayable
         $this->staticTax = $taxValue;
     }
 
+    /**
+     * Gets the price with or without discount, depending on if there is a discount object attached.
+     *
+     * @return int|float $price
+     */
     public function getPrice()
     {
         if (isset($this->discount)) {
