@@ -77,6 +77,42 @@ class DiscountTest extends Orchestra\Testbench\TestCase
         $this->assertEquals(10, $item->price);
     }
 
+    /** @test */
+    public function it_returns_the_original_value_when_price_validation_fails()
+    {
+        $discount = $this->getDiscount(5, [
+            'price' => 'min:11',
+        ]);
+
+        $cart = $this->getCart();
+
+        $item = $this->getBuyableMock();
+
+        $item = $cart->add($item);
+
+        $item->setDiscount($discount);
+
+        $this->assertEquals(10, $item->price);
+    }
+
+    /** @test */
+    public function it_returns_the_original_value_when_subtotal_validation_fails()
+    {
+        $discount = $this->getDiscount(5, [
+            'subtotal' => 'min:100',
+        ]);
+
+        $cart = $this->getCart();
+
+        $item = $this->getBuyableMock();
+
+        $item = $cart->add($item, 9);
+
+        $item->setDiscount($discount);
+
+        $this->assertEquals(10, $item->price);
+    }
+
     public function getDiscount($discount = 5, $rules = null)
     {
         $validator = $this->app->make(Factory::class);
