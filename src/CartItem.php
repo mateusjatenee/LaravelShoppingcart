@@ -71,6 +71,11 @@ class CartItem implements Arrayable
      */
     private $staticTax = null;
 
+    /**
+     * The attached discount for the cart item.
+     *
+     * @var Mateusjatenee\Shoppingcart\Discount
+     */
     private $discount = null;
 
     /**
