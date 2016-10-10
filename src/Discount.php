@@ -18,7 +18,7 @@ class Discount
     public function __construct($value, $rules = null, Validator $validator)
     {
         $this->value = $value;
-        $this->rules = $rules;
+        $this->rules = new Collection($rules);
         $this->validator = $validator;
     }
 
@@ -38,7 +38,7 @@ class Discount
 
     public function validateRules($item, $price)
     {
-        return $this->validator->make($item->toArray(), $this->rules);
+        return $this->validator->make($item->toArray(), $this->rules->toArray());
     }
 
 }
