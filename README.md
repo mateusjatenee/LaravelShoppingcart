@@ -41,6 +41,7 @@ Look at one of the following topics to learn more about LaravelShoppingcart
 * [Collections](#collections)
 * [Instances](#instances)
 * [Models](#models)
+* [Discount](#discount)
 * [Tax](#tax)
 * [Exceptions](#exceptions)
 * [Events](#events)
@@ -332,6 +333,22 @@ Cart::add('293ad', 'Product 1', 1, 9.99, ['size' => 'large'])->associate('Produc
 foreach(Cart::content() as $row) {
 	echo 'You have ' . $row->qty . ' items of ' . $row->model->name . ' with description: "' . $row->model->description . '" in your cart.';
 }
+```
+
+# Discount   
+
+It is now possible to create `Discount` objects and apply them to an item. The usage is very simple and you just have to pass two parameters — the discount value and the rules. The rules follow Laravel's validation schema. There following attributes accept validation: `price`, `qty`, `subtotal`.   
+
+```php    
+$discount = new Discount(5, [
+  'qty' => 'min:2|max:10',
+  'price' => 'min:5|max:20',
+]);
+
+$item = Cart::add('293ad', 'Laravel T-Shirt', 1, 100);
+$item->setDiscount($discount);
+
+$item->price // returns the price with the discount if validation passes or the regular price if it does not.  
 ```
 
 ## Tax   
