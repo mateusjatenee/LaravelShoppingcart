@@ -40,11 +40,7 @@ class DiscountTest extends Orchestra\Testbench\TestCase
     /** @test */
     public function it_returns_the_discounted_value()
     {
-        $discount = new Discount(5, [
-            'qty' => [
-                ['>', 3], ['<', 10],
-            ],
-        ]);
+        $discount = new Discount(5);
 
         $cart = $this->getCart();
 
