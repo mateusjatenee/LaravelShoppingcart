@@ -2,6 +2,8 @@
 
 namespace Mateusjatenee\Shoppingcart;
 
+use Illuminate\Support\Collection;
+
 class Discount
 {
     private $value;
@@ -18,7 +20,22 @@ class Discount
 
     public function setRules(array $rules)
     {
-        $this->rules = $rules;
+        $this->rules = new Collection($rules);
+    }
+
+    public function getDiscountedValue($item, $price)
+    {
+        if (!$this->passesValidation($item, $price)) {
+            return $price;
+        }
+
+        return $price - $this->value;
+    }
+
+    public function passesValidation($item, $price)
+    {
+
+        return true;
     }
 
 }

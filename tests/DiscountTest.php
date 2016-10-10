@@ -40,11 +40,9 @@ class DiscountTest extends Orchestra\Testbench\TestCase
     /** @test */
     public function it_returns_the_discounted_value()
     {
-        $this->markTestSkipped();
         $discount = new Discount(5, [
-            'quantity' => [
-                'maximum' => 10,
-                'minimum' => 3,
+            'qty' => [
+                ['>', 3], ['<', 10],
             ],
         ]);
 
