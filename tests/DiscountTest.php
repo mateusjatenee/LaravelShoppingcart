@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Contracts\Validation\Factory;
 use Mateusjatenee\Shoppingcart\Cart;
 use Mateusjatenee\Shoppingcart\Contracts\Buyable;
 use Mateusjatenee\Shoppingcart\Discount;
@@ -40,7 +41,7 @@ class DiscountTest extends Orchestra\Testbench\TestCase
     /** @test */
     public function it_returns_the_discounted_value()
     {
-        $discount = new Discount(5);
+        $discount = $this->getDiscount(5);
 
         $cart = $this->getCart();
 
@@ -52,6 +53,35 @@ class DiscountTest extends Orchestra\Testbench\TestCase
 
         $this->assertEquals(5, $item->price);
 
+    }
+
+    /** @test */
+    public function it_returns_the_original_value_when_quantity_validation_fails()
+    {
+        $discount = $this->getDiscount(5, [
+            'qty' => 'min:3|max:6',
+        ]);
+
+        $cart = $this->getCart();
+
+        $item = $this->getBuyableMock();
+
+        $item = $cart->add($item, 2);
+
+        $item->setDiscount($discount);
+
+        $this->assertEquals(10, $item->price);
+
+        $item->setQuantity(7);
+
+        $this->assertEquals(10, $item->price);
+    }
+
+    public function getDiscount($discount = 5, $rules = null)
+    {
+        $validator = $this->app->make(Factory::class);
+
+        return new Discount($discount, $rules, $validator);
     }
 
     /**
