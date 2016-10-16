@@ -158,9 +158,9 @@ class Cart
             $this->remove($cartItem->rowId);
 
             return;
-        } else {
-            $content->put($cartItem->rowId, $cartItem);
         }
+
+        $content->put($cartItem->rowId, $cartItem);
 
         $this->events->fire('cart.updated', $cartItem);
 
@@ -368,8 +368,8 @@ class Cart
 
         $this->getConnection()->table($this->getTableName())->insert([
             'identifier' => $identifier,
-            'instance'   => $this->currentInstance(),
-            'content'    => serialize($content),
+            'instance' => $this->currentInstance(),
+            'content' => serialize($content),
         ]);
 
         $this->events->fire('cart.stored');
