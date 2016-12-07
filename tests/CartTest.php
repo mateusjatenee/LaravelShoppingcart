@@ -3,6 +3,7 @@
 use Illuminate\Support\Collection;
 use Mateusjatenee\Shoppingcart\Cart;
 use Mateusjatenee\Shoppingcart\Contracts\Buyable;
+use \Mockery as m;
 
 class CartTest extends Orchestra\Testbench\TestCase
 {
@@ -33,9 +34,9 @@ class CartTest extends Orchestra\Testbench\TestCase
 
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
 
@@ -495,24 +496,24 @@ class CartTest extends Orchestra\Testbench\TestCase
         $this->assertInstanceOf(\Illuminate\Support\Collection::class, $content);
         $this->assertEquals([
             '027c91341fd5cf4d2579b49c4b6a90da' => [
-                'rowId'    => '027c91341fd5cf4d2579b49c4b6a90da',
-                'id'       => 1,
-                'name'     => 'Item name',
-                'qty'      => 1,
-                'price'    => 10.00,
-                'tax'      => 2.10,
+                'rowId' => '027c91341fd5cf4d2579b49c4b6a90da',
+                'id' => 1,
+                'name' => 'Item name',
+                'qty' => 1,
+                'price' => 10.00,
+                'tax' => 2.10,
                 'subtotal' => 10.0,
-                'options'  => new \Mateusjatenee\Shoppingcart\CartItemOptions(),
+                'options' => new \Mateusjatenee\Shoppingcart\CartItemOptions(),
             ],
             '370d08585360f5c568b18d1f2e4ca1df' => [
-                'rowId'    => '370d08585360f5c568b18d1f2e4ca1df',
-                'id'       => 2,
-                'name'     => 'Item name',
-                'qty'      => 1,
-                'price'    => 10.00,
-                'tax'      => 2.10,
+                'rowId' => '370d08585360f5c568b18d1f2e4ca1df',
+                'id' => 2,
+                'name' => 'Item name',
+                'qty' => 1,
+                'price' => 10.00,
+                'tax' => 2.10,
                 'subtotal' => 10.0,
-                'options'  => new \Mateusjatenee\Shoppingcart\CartItemOptions(),
+                'options' => new \Mateusjatenee\Shoppingcart\CartItemOptions(),
             ],
         ], $content->toArray());
     }
@@ -681,6 +682,34 @@ class CartTest extends Orchestra\Testbench\TestCase
         $cart->associate('027c91341fd5cf4d2579b49c4b6a90da', $model);
 
         $cartItem = $cart->get('027c91341fd5cf4d2579b49c4b6a90da');
+
+        $this->assertInstanceOf(ModelStub::class, $cartItem->model);
+        $this->assertEquals('Some value', $cartItem->model->someValue);
+    }
+
+    /** @test */
+    public function it_only_calls_the_model_method_once()
+    {
+        $cart = $this->getCart();
+
+        $model = m::mock(ModelStub::class);
+        $model
+            ->shouldReceive('find')
+            ->once()
+            ->andReturn(new ModelStub);
+
+        $this->app->instance(ModelStub::class, $model);
+
+        // dd($this->app->make(ModelStub::class));
+
+        $cart->add(1, 'Test item', 1, 10.00);
+
+        $cart->associate('027c91341fd5cf4d2579b49c4b6a90da', 'ModelStub');
+
+        $cartItem = $cart->get('027c91341fd5cf4d2579b49c4b6a90da');
+
+        $cartItem->model;
+        $cartItem->model;
 
         $this->assertInstanceOf(ModelStub::class, $cartItem->model);
         $this->assertEquals('Some value', $cartItem->model->someValue);
@@ -877,7 +906,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $this->expectsEvents('cart.stored');
@@ -904,7 +933,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $this->expectsEvents('cart.stored');
@@ -925,7 +954,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $this->expectsEvents('cart.restored');
@@ -954,7 +983,7 @@ class CartTest extends Orchestra\Testbench\TestCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../database/migrations'),
+            '--realpath' => realpath(__DIR__ . '/../database/migrations'),
         ]);
 
         $cart = $this->getCart();

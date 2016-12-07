@@ -323,8 +323,27 @@ class CartItem implements Arrayable
         }
 
         if ($attribute === 'model') {
-            return with(new $this->associatedModel())->find($this->id);
+            return $this->getAssociatedModel();
         }
+    }
+
+    public function getAssociatedModel()
+    {
+        if ($this->cachedModel) {
+            return $this->cachedModel;
+        }
+
+        if (is_object($this->associatedModel)) {
+            $class = get_class($this->associatedModel);
+        } else {
+            $class = $this->associatedModel;
+        }
+
+        $model = app()->make($class)->find($this->id);
+
+        $this->cachedModel = $model;
+
+        return $model;
     }
 
     /**
@@ -393,7 +412,7 @@ class CartItem implements Arrayable
     {
         ksort($options);
 
-        return md5($id.serialize($options));
+        return md5($id . serialize($options));
     }
 
     /**
@@ -404,13 +423,13 @@ class CartItem implements Arrayable
     public function toArray()
     {
         return [
-            'rowId'    => $this->rowId,
-            'id'       => $this->id,
-            'name'     => $this->name,
-            'qty'      => $this->qty,
-            'price'    => $this->price,
-            'options'  => $this->options,
-            'tax'      => $this->tax,
+            'rowId' => $this->rowId,
+            'id' => $this->id,
+            'name' => $this->name,
+            'qty' => $this->qty,
+            'price' => $this->price,
+            'options' => $this->options,
+            'tax' => $this->tax,
             'subtotal' => $this->subtotal,
         ];
     }
