@@ -8,6 +8,16 @@ use Mateusjatenee\Shoppingcart\Discount;
 class DiscountTest extends Orchestra\Testbench\TestCase
 {
     /**
+     * Setup the test environment.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+    }
+
+    /**
      * Set the package service provider.
      *
      * @param \Illuminate\Foundation\Application $app
